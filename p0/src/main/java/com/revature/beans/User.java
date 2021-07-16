@@ -8,6 +8,7 @@ public class User implements Serializable {
 	static final long serialVersionUID = 1L;
 	private int id;
 	private UserType type;
+	private AccountType accountType;
 	private String username;
 	private String email;
 	private LocalDate birthday;
@@ -96,6 +97,14 @@ public class User implements Serializable {
 		User other = (User) obj;
 		return Objects.equals(address, other.address) && Objects.equals(birthday, other.birthday)
 				&& Objects.equals(email, other.email) && id == other.id && Objects.equals(username, other.username);
+	}
+
+	public AccountType getAccountType() {
+		return accountType;
+	}
+
+	public void setAccountType(AccountType accountType) {
+		this.accountType = accountType;
 	}
 }
 	
