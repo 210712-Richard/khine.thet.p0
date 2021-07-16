@@ -1,11 +1,9 @@
 package com.revature.data;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.revature.beans.AccountType;
-import com.revature.beans.User;
-import com.revature.beans.UserType;
+import com.revature.beans.*;
 
 public class UserDAO {
 	private static List<User> users;

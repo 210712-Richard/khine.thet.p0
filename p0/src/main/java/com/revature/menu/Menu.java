@@ -4,7 +4,7 @@ import java.util.Scanner;
 import com.revature.service.*;
 import com.revature.beans.*;
 import com.revature.util.*;
-
+import com.revature.data.*;
 
 public class Menu {
 	private UserService us = new UserService();
@@ -26,11 +26,10 @@ public class Menu {
 				} else {
 					loggedUser = u;
 					System.out.println("Welcome back: "+u.getUsername());
-					// call either the Customer menu or the Admin menu, depending on user)
-					
+					// Go to either the Customer menu or the Admin menu, depending on user)
 					switch(loggedUser.getAccountType()) {
 					case CUSTOMER:
-						System.out.println("What would you like to do? Select from the menu.");
+						customerMenu();
 						//Continue here//
 						adpotee();
 						adoptor();
@@ -61,6 +60,14 @@ public class Menu {
 		System.out.println("\t1. Login");
 		System.out.println("\t2. Register");
 		System.out.println("\t3. Quit");
+		return select();
+	}
+	
+	private int customerMenu() {
+		//Customer Menu
+		System.out.println("What would you like to do? Select from the menu.");
+		System.out.println("\t1. I'm looking for fur babies to adopt!");
+		System.out.println("\t2. I want to put up the fur babies for adpotion.");
 		return select();
 	}
 	

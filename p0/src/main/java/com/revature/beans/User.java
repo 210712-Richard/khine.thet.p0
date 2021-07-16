@@ -1,7 +1,6 @@
 package com.revature.beans;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Objects;
 
 public class User implements Serializable {
@@ -16,6 +15,7 @@ public class User implements Serializable {
 
 	public User() {
 		super();
+		this.accountType = AccountType.CUSTOMER;
 	}
 	
 	public User(int id, String username, String email, LocalDate birthday, String address) {

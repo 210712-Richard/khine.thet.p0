@@ -28,7 +28,7 @@ Adoptee can:
 Adopter can:
 
 1. Choose cat or dog?
-2. See all avaliable fur babies.
+2. See all available fur babies.
 3. Select the desired fur baby/babies.
 4. Submit and wait for approval.
 5. See adoption approval status.
