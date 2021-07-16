@@ -38,5 +38,5 @@ Admin can:
 1. See adoption/ application forms.
 2. Approve or reject adoption/ application forms.
 
-* Notes
+# Notes
 - Menu is still on default. 
