@@ -15,28 +15,27 @@ public class Menu {
 		
 		main: while(true) {
 			switch(startMenu()) {
+			// LOGIN
 			case 1:
-				// Login
 				System.out.println("Please enter your username: ");
 				String username = scan.nextLine();
-				// Call the user service to find the user we want.
+				// get the user
 				User u = us.login(username);
+				// if user name is wrong
 				if(u == null) {
-					System.out.println("Invalid username. Please try again.");
+					System.out.println("Please try again.");
 				} else {
 					loggedUser = u;
-					System.out.println("Welcome back: "+u.getUsername());
-					// Go to either the Customer menu or the Admin menu, depending on user)
+					System.out.println("Hello, " + u.getUsername());
+					// go to either customer menu or banker menu
 					switch(loggedUser.getAccountType()) {
 					case CUSTOMER:
-						customerMenu();
-						//Continue here//
-						adpotee();
-						adoptor();
+						customer();
 						break;
 					case ADMIN:
 						admin();
 						break;
+					
 					}
 				}
 				break;
@@ -63,8 +62,22 @@ public class Menu {
 		return select();
 	}
 	
+	private void customer() {
+		customer: while(true) {
+			switch(customerMenu()) {
+			case 1: 
+				adoptor();
+				break;
+			
+			case 2:
+				adoptee();
+				break;
+			}
+		}
+	}
+		
 	private int customerMenu() {
-		//Customer Menu
+		//Customer Menu	
 		System.out.println("What would you like to do? Select from the menu.");
 		System.out.println("\t1. I'm looking for fur babies to adopt!");
 		System.out.println("\t2. I want to put up the fur babies for adpotion.");
@@ -81,7 +94,7 @@ public class Menu {
 		
 	}
 
-	private void adpotee() {
+	private void adoptee() {
 		// TODO Auto-generated method stub
 		
 	}

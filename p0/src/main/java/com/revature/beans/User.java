@@ -75,6 +75,14 @@ public class User implements Serializable {
 		this.type = type;
 	}
 	
+	public AccountType getAccountType() {
+		return accountType;
+	}
+
+	public void setAccountType(AccountType accountType) {
+		this.accountType = accountType;
+	}
+	
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", email=" + email + ", birthday=" + birthday
@@ -99,13 +107,7 @@ public class User implements Serializable {
 				&& Objects.equals(email, other.email) && id == other.id && Objects.equals(username, other.username);
 	}
 
-	public AccountType getAccountType() {
-		return accountType;
-	}
-
-	public void setAccountType(AccountType accountType) {
-		this.accountType = accountType;
-	}
+	
 }
 	
 

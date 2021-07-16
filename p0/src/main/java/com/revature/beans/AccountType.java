@@ -1,6 +1,8 @@
 package com.revature.beans;
 
-public enum AccountType {
+import java.io.Serializable;
+
+public enum AccountType implements Serializable{
 	//Both adoptee and adopter are customers
 	CUSTOMER,
 	
