@@ -7,9 +7,9 @@ Require TDD and testing using JUnit.
 
 Presentation Date: July 28th, 2021
 
-#Animal Adoption Site
+# Animal Adoption Site
 
-##Features
+## Features
 
 There will be 3 types of users: Adoptee, Adopter and Admin.
 
