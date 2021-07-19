@@ -1,5 +1,6 @@
 package com.revature.menu;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 import com.revature.service.*;
 import com.revature.beans.*;
@@ -8,39 +9,49 @@ import com.revature.data.*;
 
 public class Menu {
 	private UserService us = new UserService();
-	private User loggedUser = null;
 	private Scanner scan = SingletonScanner.getScanner().getScan();
+	private static User user = null;
 	
 	public void start() {
 		
 		main: while(true) {
+			
 			switch(startMenu()) {
 			// LOGIN
 			case 1:
 				System.out.println("Please enter your username: ");
 				String username = scan.nextLine();
 				// get the user
-				User u = us.login(username);
+				user = us.login(username);
 				// if user name is wrong
-				if(u == null) {
+				if(user == null) {
 					System.out.println("Please try again.");
-				} else {
-					loggedUser = u;
-					System.out.println("Hello, " + u.getUsername());
-					// go to either customer menu or banker menu
-					switch(loggedUser.getAccountType()) {
-					case CUSTOMER:
-						customer();
-						break;
-					case ADMIN:
-						admin();
-						break;
-					
-					}
+				} else if(user.getTypes() == UserType.ADOPTER){
+					System.out.println("Hello, " + user.getUsername());
+					adopter();
+				} else if(user.getTypes() == UserType.ADOPTEE) {
+					System.out.println("Hello, " + user.getUsername());
+					adoptee();
+				} else if (user.getTypes() == UserType.ADMIN) {
+					System.out.println("Welcome back, " + user.getUsername());
+					admin();
 				}
+//					switch(customerMenu()) {
+						// go to either customer menu or banker menu
+//					switch(loggedUser.getTypes()) {
+//					case ADOPTER:
+//						adopter();
+//					case ADOPTEE:
+//						adoptee();
+//						break;
+//					case ADMIN:
+//						admin();
+//						break;
+//					
+//					}
 				break;
 			case 2:
-				// register
+				register();
 				break;
 			case 3:
 				// quit
@@ -62,41 +73,44 @@ public class Menu {
 		return select();
 	}
 	
-	private void customer() {
-		customer: while(true) {
-			switch(customerMenu()) {
-			case 1: 
-				adoptor();
-				break;
-			
-			case 2:
-				adoptee();
-				break;
-			}
-		}
-	}
-		
-	private int customerMenu() {
-		//Customer Menu	
-		System.out.println("What would you like to do? Select from the menu.");
-		System.out.println("\t1. I'm looking for fur babies to adopt!");
-		System.out.println("\t2. I want to put up the fur babies for adpotion.");
-		return select();
-	}
-	
 	private void admin() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	private void adoptor() {
-		// TODO Auto-generated method stub
+	private void adopter() {
+		System.out.println("Here are the available fur babies.");
 		
 	}
 
 	private void adoptee() {
-		// TODO Auto-generated method stub
+		System.out.println("Please fill out the form.");
 		
+	}
+	
+	private void register() {
+		String username;
+		String email;
+		String birthday;
+		String address = null;
+		LocalDate localDate;
+		System.out.println("Enter your username.");
+		while(true) {
+			username = scan.nextLine();
+			User user = us.login(username);
+			if(user != null) {
+				System.out.println("There is an error with your registration. Please try again.");			
+			} else {
+				System.out.println("Enter your email.");
+				email = scan.nextLine();
+				System.out.println("Enter your birthday. (MM/DD/YYYY");
+				birthday = scan.nextLine();
+				localDate = LocalDate.parse(birthday, null);
+				break;
+			}
+			
+		}
+		us.register(username, email, localDate, address);
 	}
 
 	private int select() {

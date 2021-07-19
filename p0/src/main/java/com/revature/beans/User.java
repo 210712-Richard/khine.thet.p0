@@ -4,10 +4,10 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class User implements Serializable {
+	
 	static final long serialVersionUID = 1L;
 	private int id;
 	private UserType type;
-	private AccountType accountType;
 	private String username;
 	private String email;
 	private LocalDate birthday;
@@ -15,7 +15,6 @@ public class User implements Serializable {
 
 	public User() {
 		super();
-		this.accountType = AccountType.CUSTOMER;
 	}
 	
 	public User(int id, String username, String email, LocalDate birthday, String address) {
@@ -75,23 +74,15 @@ public class User implements Serializable {
 		this.type = type;
 	}
 	
-	public AccountType getAccountType() {
-		return accountType;
-	}
-
-	public void setAccountType(AccountType accountType) {
-		this.accountType = accountType;
-	}
-	
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", email=" + email + ", birthday=" + birthday
-				+ ", address=" + address + "]";
+		return "User [id=" + id + ", type=" + type + ", username=" + username + ", email=" + email + ", birthday="
+				+ birthday + ", address=" + address + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(address, birthday, email, id, username);
+		return Objects.hash(address, birthday, email, id, type, username);
 	}
 
 	@Override
@@ -104,10 +95,10 @@ public class User implements Serializable {
 			return false;
 		User other = (User) obj;
 		return Objects.equals(address, other.address) && Objects.equals(birthday, other.birthday)
-				&& Objects.equals(email, other.email) && id == other.id && Objects.equals(username, other.username);
+				&& Objects.equals(email, other.email) && id == other.id && type == other.type
+				&& Objects.equals(username, other.username);
 	}
-
-	
 }
-	
 
+	
+	

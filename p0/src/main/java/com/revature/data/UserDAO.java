@@ -44,7 +44,7 @@ public class UserDAO {
 		return ds.readObjectsFromFile(filename);
 	}
 	
-	public User createUser(String username, String email, LocalDate birthday, String address, AccountType accountType) {
+	public User createUser(String username, String email, LocalDate birthday, String address) {
 		//Must add!!
 		
 		return null;
