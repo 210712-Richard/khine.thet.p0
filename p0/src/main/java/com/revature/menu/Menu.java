@@ -39,8 +39,6 @@ public class Menu {
 					switch(loggedUser.getTypes()) {
 					case ADOPTER:
 						adopter();
-					case ADOPTEE:
-						adoptee();
 						break;
 					case ADMIN:
 						admin();
@@ -63,8 +61,6 @@ public class Menu {
 							email = scan.nextLine();					
 						}
 							System.out.println("Enter your birthday. (YYYY/MM/DD)");
-//							String birthday = scan.nextLine();
-//							System.out.println("Account successfully created.");
 							List<Integer> bday = Stream.of(scan.nextLine().split("/"))
 									.map((str) -> Integer.parseInt(str)).collect(Collectors.toList());
 							
@@ -107,19 +103,16 @@ public class Menu {
 	private void admin() {
 		System.out.println("Select:");
 		System.out.println("\t1. Adoption application");
-		System.out.println("\t2. Adoptee application");
-		
+		//approve();
+		//notApprove();
 		// TODO Auto-generated method stub
 		
 	}
 
 	private void adopter() {
 		System.out.println("Here are the available fur babies.");
-		
-	}
-
-	private void adoptee() {
-		System.out.println("Please fill out the form.");
+		//select();
+		//fillForm();
 		
 	}
 

@@ -28,33 +28,31 @@ public class UserDAO {
 		}
 	}
 	
+	public void addUser(User u) {
+		u.setId(users.size());
+		users.add(u);
+	}
+	
 	public User getUser(String username) {
-		
-			for(User user : users) {
-				if(user.getUsername().equals(username)) {
-					return user;
-				}
-			}
-		
-			return null;
+		return users.stream()
+				.filter((u) -> u.getUsername().equals(username))
+				.findFirst()
+				.orElse(null);
 	}
 	
 	public List<User> getUsers() {
-		DataSerializer<User> ds = new DataSerializer<User>();
-		return ds.readObjectsFromFile(filename);
-	}
-	
-	public User createUser(String username, String email, LocalDate birthday, String address) {
-		//Must add!!
-		
-		return null;
-		
+		return users;
 	}
 	
 	public void writeToFile() {
 		new DataSerializer<User>().writeObjectsToFile(users, filename);
 	}
-	
+
+	public User addUser(String name, String email, LocalDate birthday, String address) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 	
 

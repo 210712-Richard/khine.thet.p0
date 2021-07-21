@@ -4,9 +4,8 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class User implements Serializable {
-	
 	static final long serialVersionUID = 1L;
-	private int id;
+	private Integer id;
 	private UserType type;
 	private String username;
 	private String email;
@@ -15,6 +14,7 @@ public class User implements Serializable {
 
 	public User() {
 		super();
+		this.type = UserType.ADOPTER;
 	}
 	
 	public User(int id, String username, String email, LocalDate birthday, String address) {
@@ -75,16 +75,18 @@ public class User implements Serializable {
 	}
 	
 	@Override
-	public String toString() {
-		return "User [id=" + id + ", type=" + type + ", username=" + username + ", email=" + email + ", birthday="
-				+ birthday + ", address=" + address + "]";
-	}
-
-	@Override
 	public int hashCode() {
-		return Objects.hash(address, birthday, email, id, type, username);
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((address == null) ? 0 : birthday.hashCode());
+		result = prime * result + ((birthday == null) ? 0 : birthday.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		return result;
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -94,11 +96,41 @@ public class User implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		return Objects.equals(address, other.address) && Objects.equals(birthday, other.birthday)
-				&& Objects.equals(email, other.email) && id == other.id && type == other.type
-				&& Objects.equals(username, other.username);
+		if (birthday == null) {
+			if (other.birthday != null)
+				return false;
+		} else if (!birthday.equals(other.birthday))
+			return false;
+		if (address == null) {
+			if (other.address != null)
+				return false;
+		} else if (!address.equals(other.address))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
+			return false;
+		if (type != other.type)
+			return false;
+		return true;
 	}
-}
 
-	
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", type=" + type + ", username=" + username + ", email=" + email + ", birthday="
+				+ birthday + ", address=" + address + "]";
+	}
+
+}	
 	
