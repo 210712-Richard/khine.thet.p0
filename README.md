@@ -11,7 +11,7 @@ Presentation Date: July 28th, 2021
 
 ## Features
 
-There will be 3 types of users: Adoptee, Adopter and Admin.
+There will be 2 types of users: Adopter and Admin.
 
 All users can:
 
@@ -19,11 +19,6 @@ All users can:
 2. Log in.
 3. Log out.
 
-Adoptee can:
-
-1. Fill out the form to put up the adoption.
-2. Submit and wait for approval.
-3. See approval status.
 
 Adopter can:
 
