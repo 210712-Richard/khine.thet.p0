@@ -22,16 +22,17 @@ All users can:
 
 Adopter can:
 
-1. Choose cat or dog?
-2. See all available fur babies.
-3. Select the desired fur baby/babies.
-4. Submit and wait for approval.
-5. See adoption approval status.
+1. See all available fur babies.
+2. Select the desired fur baby/babies.
+3. Fil out the form.
+4. See adoption approval status.
 
 Admin can:
 
 1. See adoption/ application forms.
-2. Approve or reject adoption/ application forms.
+2. Approve adoption
+3. Reject adoption.
+4. List the available pets. 
 
 # Notes
 - Menu is still on default. 
