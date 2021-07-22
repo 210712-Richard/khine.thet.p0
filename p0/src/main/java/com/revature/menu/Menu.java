@@ -1,5 +1,8 @@
 package com.revature.menu;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.OutputStream;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
@@ -14,14 +17,20 @@ import com.revature.util.*;
 
 public class Menu {
 	private UserService us = new UserService();
+	//private Pets p = new Pets();
 	private Scanner scan = SingletonScanner.getScanner().getScan();
+	//private InputStream input = new InputStream("adoption.txt");
 	private static User user = null;
 	private User loggedUser = null;
 	
+	
 	public void start() {
+		
+		File adoptionFile = new File("Adoption.txt");
 		
 		main: while(true) {
 			
+			//OutputStream save = new OutputStream(adoption);
 			switch(startMenu()) {
 			// LOGIN
 			case 1:
@@ -32,7 +41,7 @@ public class Menu {
 				// if user name is wrong
 				if(user == null) {
 					System.out.println("User does not exist.");		
-				} else {
+  				} else {
 					loggedUser = user;
 					System.out.println("Hello " + user.getUsername());
 						 //go to either customer menu or banker menu
@@ -64,14 +73,18 @@ public class Menu {
 							List<Integer> bday = Stream.of(scan.nextLine().split("/"))
 									.map((str) -> Integer.parseInt(str)).collect(Collectors.toList());
 							
-							LocalDate birth = LocalDate.of(bday.get(0), bday.get(1), bday.get(2));
-							if(!us.checkBirthday(birth)) {
+							LocalDate birthday = LocalDate.of(bday.get(0), bday.get(1), bday.get(2));
+							if(!us.checkBirthday(birthday)) {
 								System.out.println("You must be 18 years or older to adopt a pet.");
 								continue main;
 							}
+							System.out.println("Enter your address.");
+							String address = scan.nextLine();
+							us.register(username1, email, birthday, address);
 							System.out.println("Account successfully created.");
 					}
 				}
+				
 			case 3:
 				// quit
 				System.out.println("Goodbye!");
@@ -99,23 +112,65 @@ public class Menu {
 		return select();
 	}
 	
-	
 	private void admin() {
-		System.out.println("Select:");
-		System.out.println("\t1. Adoption application");
-		//approve();
-		//notApprove();
-		// TODO Auto-generated method stub
 		
+		admin: while(true) {
+			//Pets p = new Pets();
+			switch(adminMenu()) {
+			case 1:
+				//add to adoption site
+				System.out.println("Name.");
+				String name = scan.next();
+				System.out.println("Breed.");
+				String breed = scan.next();
+				System.out.println("Color:");
+				String color = scan.next();
+				System.out.println("Age:");
+				int age = scan.nextInt();
+				System.out.println("Size:");
+				String size = scan.next();
+				System.out.println("Sex:");
+				String sex = scan.next();
+				System.out.println("Contact intormation:");
+				String email = scan.next();
+				while(!isValidEmail(email)) {
+					System.out.println("Invalid input. Please try again.");
+					email = scan.next();					
+				}
+				
+				System.out.println("Application recieved. Please wait for 3-5 days for approval to be put up for adoption.");
+			case 2:
+				//view applications, then approve or reject
+			} break admin;
+			
+			}
 	}
 
+	private int adminMenu() {
+		int selection;
+		System.out.println("What would you like to do?");
+		System.out.println("\t1. Add to adoption list.");
+		System.out.println("\t2. Adoption application");
+		selection = select();
+		return selection;
+	}
+	
+	
 	private void adopter() {
 		System.out.println("Here are the available fur babies.");
 		//select();
 		//fillForm();
 		
 	}
-
+	
+	private int adopterMenu() {
+		return 0;
+		
+	}
+	
+	private void applicationApproval() {
+	
+	}
 	private int select() {
 		int selection;
 		try {
