@@ -16,7 +16,7 @@ import com.revature.beans.*;
 import com.revature.util.*;
 
 public class Menu {
-	private UserService us = new UserService();
+	private UserService us = new UserServiceImp();
 	//private Pets p = new Pets();
 	private Scanner scan = SingletonScanner.getScanner().getScan();
 	//private InputStream input = new InputStream("adoption.txt");

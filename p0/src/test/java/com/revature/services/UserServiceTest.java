@@ -18,10 +18,10 @@ import org.mockito.Mockito;
 import com.revature.beans.User;
 import com.revature.beans.UserType;
 import com.revature.data.UserDAO;
-import com.revature.service.UserService;
+import com.revature.service.UserServiceImp;
 
 public class UserServiceTest {
-	private static UserService service;
+	private static UserServiceImp service;
 	private static User u;
 	
 	@BeforeAll
@@ -32,7 +32,7 @@ public class UserServiceTest {
 	
 	@BeforeEach
 	public void setupTest() {
-		service = new UserService();
+		service = new UserServiceImp();
 		service.ud = Mockito.mock(UserDAO.class);
 	}
 	
@@ -48,23 +48,23 @@ public class UserServiceTest {
 	}
 	
 	@Test
-	public void testRegister() {
+	public void testRegisterReturnsValid() {
 		String username = "test";
 		String email = "test@test.test";
-		LocalDate date = LocalDate.of(2020, 2, 2);
+		LocalDate birthday = LocalDate.of(1998, 1, 1);
 		String address = "test";
-		service.register(username, email, date, address);
+		User user = service.register(username, email, birthday, address);
 		
 		ArgumentCaptor<User> captor = ArgumentCaptor.forClass(User.class);
 
 		Mockito.verify(service.ud).addUser(captor.capture());
-
 		Mockito.verify(service.ud).writeToFile();
 
 		User u = captor.getValue();
+		assertEquals(UserType.ADOPTER, u.getTypes(), "Asserting starting type is ADOPTER");
 		assertEquals(username, u.getUsername(), "Asserting username is correct");
 		assertEquals(email, u.getEmail(), "Asserting email is correct");
-		assertEquals(date, u.getBirthday(), "Asserting birthday is correct");
+		assertEquals(birthday, u.getBirthday(), "Asserting birthday is correct");
 		assertEquals(address, u.getAddress(), "Asserting address is correct");
 	}
 	
