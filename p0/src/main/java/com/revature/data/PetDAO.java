@@ -29,11 +29,23 @@ public class PetDAO {
 		ds.writeObjectsToFile(pet, filename);		
 	}
 	
-	public List<Pet> getUsers(){
-		return pet;
+	public void addPet(Pet p) {
+		p.setId(pet.size());
+		pet.add(p);
 	}
 	
+	public Pet getPet(String name) {
+		return pet.stream()
+				.filter((u) -> u.getId().equals(name))
+				.findFirst()
+				.orElse(null);
+	}
 	public void writeToFile() {
 		new DataSerializer<Pet>().writeObjectsToFile(pet, filename);
+	}
+
+	public Pet addPet(String name, String breed, String color, String age, String size, String sex) {
+		pet.addAll(pet);
+		return null;
 	}
 }

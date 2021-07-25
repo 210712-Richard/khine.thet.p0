@@ -158,6 +158,7 @@ public class Menu {
 	
 	private void adopter() {
 		System.out.println("Here are the available fur babies.");
+		
 		//select();
 		//fillForm();
 		

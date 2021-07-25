@@ -13,5 +13,6 @@ public class Driver {
 		app.get("/", (ctx) -> ctx.html("Hello World"));
 		
 		app.post("/users", uc::login);
+		app.get("users/:username/birthday", uc::getBirthday);
 	}
 }

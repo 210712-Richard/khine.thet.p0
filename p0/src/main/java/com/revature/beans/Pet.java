@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class Pet implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private Integer id;
 	private String name;
 	private String breed;
 	private String color;
@@ -22,6 +24,12 @@ public class Pet implements Serializable {
 		this.age = age;
 		this.size = size;
 		this.sex = sex;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	public String getName() {
 		return name;
@@ -117,12 +125,8 @@ public class Pet implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Pet [name=" + name + ", breed=" + breed + ", color=" + color + ", age=" + age + ", size=" + size
+		return "Pet [id=" + id + ", name=" + name + ", breed=" + breed + ", color=" + color + ", age=" + age + ", size=" + size
 				+ ", sex=" + sex + "]";
 	}
-	
-	
-	
-	
 }
 
