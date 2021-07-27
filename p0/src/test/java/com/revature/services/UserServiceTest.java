@@ -18,10 +18,10 @@ import org.mockito.Mockito;
 import com.revature.beans.User;
 import com.revature.beans.UserType;
 import com.revature.data.UserDAO;
-import com.revature.service.UserServiceImp;
+import com.revature.service.UserService;
 
 public class UserServiceTest {
-	private static UserServiceImp service;
+	private static UserService service;
 	private static User u;
 	
 	@BeforeAll
@@ -32,7 +32,7 @@ public class UserServiceTest {
 	
 	@BeforeEach
 	public void setupTest() {
-		service = new UserServiceImp();
+		service = new UserService();
 		service.ud = Mockito.mock(UserDAO.class);
 	}
 	

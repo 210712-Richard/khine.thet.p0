@@ -2,6 +2,7 @@ package com.revature.menu;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.time.LocalDate;
 import java.util.List;
@@ -16,7 +17,10 @@ import com.revature.beans.*;
 import com.revature.util.*;
 
 public class Menu {
-	private UserService us = new UserServiceImp();
+	private UserService us = new UserService();
+	private AdminService as = new AdminService();
+	private AdopterService adps = new AdopterService();
+	
 	//private Pets p = new Pets();
 	private Scanner scan = SingletonScanner.getScanner().getScan();
 	//private InputStream input = new InputStream("adoption.txt");
@@ -24,7 +28,7 @@ public class Menu {
 	private User loggedUser = null;
 	
 	
-	public void start() {
+	public void start() throws IOException {
 		
 		File adoptionFile = new File("Adoption.txt");
 		
@@ -126,7 +130,7 @@ public class Menu {
 				System.out.println("Color:");
 				String color = scan.next();
 				System.out.println("Age:");
-				int age = scan.nextInt();
+				String age = scan.next();
 				System.out.println("Size:");
 				String size = scan.next();
 				System.out.println("Sex:");
@@ -138,7 +142,7 @@ public class Menu {
 					email = scan.next();					
 				}
 				
-				System.out.println("Application recieved. Please wait for 3-5 days for approval to be put up for adoption.");
+				System.out.println("Application recieved. Please wait for 3-5 days for approval.");
 			case 2:
 				//view applications, then approve or reject
 			} break admin;
@@ -156,12 +160,13 @@ public class Menu {
 	}
 	
 	
-	private void adopter() {
+	private void adopter() throws IOException {
+		Pet p;
 		System.out.println("Here are the available fur babies.");
-		
+		p = adps.display("pet.dat");
+		select();
 		//select();
 		//fillForm();
-		
 	}
 	
 	private int adopterMenu() {

@@ -1,5 +1,9 @@
 package com.revature.data;
 
+import java.util.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,27 +29,45 @@ public class PetDAO {
 			pet.add(new Pet("Tucker", "Australian Shepherd", "black", "2 years", "medium", "male"));
 			pet.add(new Pet("Rocky", "Pit Bull", "black", "8 months", "medium", "male"));
 			pet.add(new Pet("Bell", "Chihuahua", "brown", "4 years", "small", "female"));
-		}
-		ds.writeObjectsToFile(pet, filename);		
+			
+			ds.writeObjectsToFile(pet, filename);
+		}		
 	}
 	
 	public void addPet(Pet p) {
-		p.setId(pet.size());
 		pet.add(p);
 	}
 	
-	public Pet getPet(String name) {
-		return pet.stream()
-				.filter((u) -> u.getId().equals(name))
-				.findFirst()
-				.orElse(null);
+//	public List<Pet> getList(String string) {
+//		return getList("pet.dat");
+//	}
+	
+	public Pet display() throws IOException {
+		try {
+			BufferedReader br = new BufferedReader(new FileReader("pet.dat"));
+			String s = "";
+			while((s = br.readLine()) != null) {
+				String[] data = s.split(",");
+				int size = pet.size();
+				for(int i = 0; i < size; i++) {
+					System.out.println(data);
+				}
+				System.out.println();
+			}
+		} catch(Exception e) {
+		
 	}
+		return null;
+	}
+	
 	public void writeToFile() {
 		new DataSerializer<Pet>().writeObjectsToFile(pet, filename);
 	}
 
 	public Pet addPet(String name, String breed, String color, String age, String size, String sex) {
-		pet.addAll(pet);
+		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 }

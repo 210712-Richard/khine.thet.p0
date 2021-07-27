@@ -4,14 +4,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.revature.beans.User;
-import com.revature.service.UserServiceImp;
+import com.revature.service.UserService;
 
 import io.javalin.http.Context;
 
 public class UserController {
 	
 	private static Logger log = LogManager.getLogger(UserController.class);
-	private UserServiceImp us = new UserServiceImp();
+	private UserService us = new UserService();
 	
 	
 	public void login(Context ctx) {
@@ -35,6 +35,24 @@ public class UserController {
 		
 	}
 	
+	public void logout(Context ctx) {
+		ctx.req.getSession().invalidate();
+		ctx.status(204);
+	}
+	
+	public void register(Context ctx) {
+		User  u = ctx.bodyAsClass(User.class);
+		
+		if(us.checkAvailability(u.getUsername())) {
+			User newUser = us.register(u.getUsername(), u.getEmail(), u.getBirthday(), u.getAddress());
+			ctx.status(201);
+			ctx.json(newUser);
+		} else {
+			ctx.status(409);
+			ctx.html("Name already taken.");
+		}
+	}
+	
 	public void getBirthday(Context ctx) {
 		String username = ctx.pathParam("username");
 		User loggedUser = ctx.sessionAttribute("loggedUser");
@@ -44,5 +62,16 @@ public class UserController {
 			return;
 		}
 		ctx.json(loggedUser.getBirthday());
+	}
+	
+	public void getAddress(Context ctx) {
+		String username = ctx.pathParam("username");
+		User loggedUser = ctx.sessionAttribute("loggedUser");
+		
+		if(loggedUser == null || loggedUser.getUsername().equals(username)) {
+			ctx.status(403);
+			return;
+		}
+		ctx.json(loggedUser.getAddress());
 	}
 }
