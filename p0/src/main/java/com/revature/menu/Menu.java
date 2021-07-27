@@ -19,14 +19,11 @@ import com.revature.util.*;
 public class Menu {
 	private UserService us = new UserService();
 	private AdminService as = new AdminService();
-	private AdopterService adps = new AdopterService();
 	
-	//private Pets p = new Pets();
 	private Scanner scan = SingletonScanner.getScanner().getScan();
-	//private InputStream input = new InputStream("adoption.txt");
+	
 	private static User user = null;
 	private User loggedUser = null;
-	
 	
 	public void start() throws IOException {
 		
@@ -161,22 +158,33 @@ public class Menu {
 	
 	
 	private void adopter() throws IOException {
-		Pet p;
-		System.out.println("Here are the available fur babies.");
-		p = adps.display("pet.dat");
-		select();
+//		Pet p;
+//		
+//		p = adps.display("pet.dat");
+//		select();
 		//select();
 		//fillForm();
+		adopter: while(true) {
+			switch(adopterMenu()) {
+			case 1: 
+				System.out.println("Here are the available fur babies.");
+				AdopterService.getAll();
+				AdopterService.apply();
+			case 2:
+				//check status()
+			} break adopter;
+		} 
 	}
 	
 	private int adopterMenu() {
-		return 0;
-		
+		int selection;
+		System.out.println("What would you like to do?");
+		System.out.println("\t1. See available pets for adoption.");
+		System.out.println("\t2. Check my application status.");
+		selection = select();
+		return selection;
 	}
 	
-	private void applicationApproval() {
-	
-	}
 	private int select() {
 		int selection;
 		try {

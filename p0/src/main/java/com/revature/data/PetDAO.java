@@ -38,15 +38,24 @@ public class PetDAO {
 		pet.add(p);
 	}
 	
-//	public List<Pet> getList(String string) {
-//		return getList("pet.dat");
-//	}
+	public List<Pet> getList(String string) {
+		System.out.println(pet);
+		return pet;
+	}
+	
+	public Pet getPet() {
+		
+		return pet.stream()
+				.filter((p)-> p.getName().equals(filename))
+				.findFirst()
+				.orElse(null);
+	}
 	
 	public Pet display() throws IOException {
 		try {
-			BufferedReader br = new BufferedReader(new FileReader("pet.dat"));
+			Scanner sc = new Scanner(new FileReader("pet.dat"));
 			String s = "";
-			while((s = br.readLine()) != null) {
+			while((s = sc.nextLine()) != null) {
 				String[] data = s.split(",");
 				int size = pet.size();
 				for(int i = 0; i < size; i++) {
@@ -55,18 +64,24 @@ public class PetDAO {
 				System.out.println();
 			}
 		} catch(Exception e) {
-		
+		System.out.println();
 	}
 		return null;
 	}
+	
 	
 	public void writeToFile() {
 		new DataSerializer<Pet>().writeObjectsToFile(pet, filename);
 	}
 
-	public Pet addPet(String name, String breed, String color, String age, String size, String sex) {
-		// TODO Auto-generated method stub
-		return null;
+//	public Pet addPet(String name, String breed, String color, String age, String size, String sex) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+
+	public Pet addPet() {
+		System.out.println(pet);
+		return (Pet) pet;
 	}
 
 

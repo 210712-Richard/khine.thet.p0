@@ -11,6 +11,7 @@ import com.revature.beans.*;
 public class AdopterService {
 	public static PetDAO pd = new PetDAO();
 	public static UserDAO ud = new UserDAO();
+	public static AdoptionApplication application = new AdoptionApplication();
 
 	public static User login(String name) {
 		User u = ud.getUser(name);
@@ -18,23 +19,21 @@ public class AdopterService {
 		return u;
 	}
 
-//	public static List<Pet> getList(String string) {
-//		List<Pet> p = pd.getList();
-//		return p;
-//		
-//	}
+	
+	public static void apply() {
+		User u = new User();
+		if(u.getUsername() != application.getName()) {
+			System.out.println("");
+		}
+	}
+	
+	public static Pet getAll() {
+		Pet p = (Pet) pd.getPet();
+		return p;
+	}
 	
 	public static void viewStatus() {
 		//
 	}
-//
-//	public List<Pet> getList(String string) {
-//		List<Pet> p = pd.getList();
-//		return p;
-//	}
 
-	public Pet display(String string) throws IOException {
-		Pet p = pd.display();
-		return p;
-	}
 }

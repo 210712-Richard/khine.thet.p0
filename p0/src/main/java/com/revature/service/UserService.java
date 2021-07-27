@@ -34,6 +34,11 @@ public class UserService {
 		return birth.isBefore(ageReq);
 	}
 
+	public void changeAddress(User u, String email) {
+		u.setEmail(email);
+		ud.writeToFile();
+	}
+	
 	public boolean checkStatus() {
 		// TODO Auto-generated method stub
 		return false;
