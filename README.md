@@ -18,12 +18,12 @@ All users can:
 1. Create account.
 2. Log in.
 3. Log out.
+4. See all available pets.
 
 
 Adopter can:
 
-1. See all available fur babies.
-2. Select the desired fur baby/babies.
+1. Select the desired fur baby/babies.
 3. Fil out the form.
 4. See adoption approval status.
 
