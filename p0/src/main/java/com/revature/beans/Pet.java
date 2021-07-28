@@ -1,9 +1,10 @@
 package com.revature.beans;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
-public class Pet implements Serializable {
+public class Pet implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String name;
@@ -16,8 +17,9 @@ public class Pet implements Serializable {
 	public Pet() {
 		super();
 	}
-	public Pet(String name, String breed, String color, String age, String size, String sex) {
+	public Pet(int id, String name, String breed, String color, String age, String size, String sex) {
 		this();
+		this.id = id;
 		this.name = name;
 		this.breed = breed;
 		this.color = color;

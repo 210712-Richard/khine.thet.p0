@@ -19,21 +19,27 @@ public class AdopterService {
 		return u;
 	}
 
-	
-	public static void apply() {
+	public static AdoptionApplication apply() {
 		User u = new User();
+		AdoptionApplication application = new AdoptionApplication();
 		if(u.getUsername() != application.getName()) {
-			System.out.println("");
+			application.setName(u.getUsername());
+			application.setBirthday(u.getBirthday());
+			application.setAddress(u.getAddress());
 		}
+		return application;
 	}
 	
-	public static Pet getAll() {
-		Pet p = (Pet) pd.getPet();
+	public static List<Pet> getPet() {
+		List<Pet> p;
+		p = pd.getPet();
 		return p;
-	}
+		}
 	
 	public static void viewStatus() {
-		//
+		//TODO
 	}
+	
+	
 
 }

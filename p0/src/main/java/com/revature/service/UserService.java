@@ -17,7 +17,12 @@ public class UserService {
 	}
 
 	public User register(String name, String email, LocalDate birthday, String address) {
-		User u = ud.addUser(name, email, birthday, address);
+		User u = new User();
+		u.setUsername(name);
+		u.setEmail(email);
+		u.setBirthday(birthday);
+		u.setAddress(address);
+		ud.addUser(u);
 		return u;
 	}
 
@@ -34,9 +39,10 @@ public class UserService {
 		return birth.isBefore(ageReq);
 	}
 
-	public void changeAddress(User u, String email) {
-		u.setEmail(email);
+	public User changeAddress(User u, String address) {
+		u.setEmail(address);
 		ud.writeToFile();
+		return u;
 	}
 	
 	public boolean checkStatus() {

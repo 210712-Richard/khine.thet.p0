@@ -21,68 +21,36 @@ public class PetDAO {
 		
 		if(pet == null) {
 			pet = new ArrayList<Pet>();
-			pet.add(new Pet("Daisy", "Beagle", "brown", "6 months", "medium", "female"));
-			pet.add(new Pet("Buddy", "Bulldog", "white", "2 years", "big", "male"));
-			pet.add(new Pet("Jack", "French Bulldog", "white", "3 months", "medium", "male"));
-			pet.add(new Pet("Lola", "Terrier", "black", "7 months", "small", "female"));
-			pet.add(new Pet("Boba", "Corgi", "brown", "2 months", "small", "female"));
-			pet.add(new Pet("Tucker", "Australian Shepherd", "black", "2 years", "medium", "male"));
-			pet.add(new Pet("Rocky", "Pit Bull", "black", "8 months", "medium", "male"));
-			pet.add(new Pet("Bell", "Chihuahua", "brown", "4 years", "small", "female"));
+			pet.add(new Pet(pet.size(), "Daisy", "Beagle", "brown", "6 months", "medium", "female"));
+			pet.add(new Pet(pet.size(), "Buddy", "Bulldog", "white", "2 years", "big", "male"));
+			pet.add(new Pet(pet.size(), "Jack", "French Bulldog", "white", "3 months", "medium", "male"));
+			pet.add(new Pet(pet.size(), "Lola", "Terrier", "black", "7 months", "small", "female"));
+			pet.add(new Pet(pet.size(), "Boba", "Corgi", "brown", "2 months", "small", "female"));
+			pet.add(new Pet(pet.size(), "Tucker", "Australian Shepherd", "black", "2 years", "medium", "male"));
+			pet.add(new Pet(pet.size(), "Rocky", "Pit Bull", "black", "8 months", "medium", "male"));
+			pet.add(new Pet(pet.size(), "Bell", "Chihuahua", "brown", "4 years", "small", "female"));
 			
 			ds.writeObjectsToFile(pet, filename);
 		}		
 	}
 	
 	public void addPet(Pet p) {
+		p.setId(pet.size());
 		pet.add(p);
 	}
 	
-	public List<Pet> getList(String string) {
-		System.out.println(pet);
-		return pet;
-	}
-	
-	public Pet getPet() {
-		
+	public Pet getPet(String username) {
 		return pet.stream()
-				.filter((p)-> p.getName().equals(filename))
+				.filter((pet) -> pet.getName().equals(username))
 				.findFirst()
 				.orElse(null);
 	}
 	
-	public Pet display() throws IOException {
-		try {
-			Scanner sc = new Scanner(new FileReader("pet.dat"));
-			String s = "";
-			while((s = sc.nextLine()) != null) {
-				String[] data = s.split(",");
-				int size = pet.size();
-				for(int i = 0; i < size; i++) {
-					System.out.println(data);
-				}
-				System.out.println();
-			}
-		} catch(Exception e) {
-		System.out.println();
+	public List<Pet> getPet() {
+		return pet;
 	}
-		return null;
-	}
-	
 	
 	public void writeToFile() {
 		new DataSerializer<Pet>().writeObjectsToFile(pet, filename);
 	}
-
-//	public Pet addPet(String name, String breed, String color, String age, String size, String sex) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-
-	public Pet addPet() {
-		System.out.println(pet);
-		return (Pet) pet;
-	}
-
-
 }

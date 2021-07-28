@@ -44,6 +44,10 @@ public class UserDAO {
 		return users;
 	}
 	
+	public String getAddress(User u) {
+		return u.getAddress();
+	}
+	
 	public void writeToFile() {
 		new DataSerializer<User>().writeObjectsToFile(users, filename);
 	}

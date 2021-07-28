@@ -20,7 +20,14 @@ public class AdminService {
 	}
 
 	public Pet addPet(String name, String breed, String color, String age, String size, String sex) {
-		Pet p = pd.addPet();
+		Pet p = new Pet();
+		p.setName(name);
+		p.setBreed(breed);
+		p.setColor(color);
+		p.setAge(age);
+		p.setSize(size);
+		p.setSex(sex);
+		pd.addPet(p);
 		return p;
 	}
 	

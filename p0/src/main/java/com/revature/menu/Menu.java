@@ -168,7 +168,7 @@ public class Menu {
 			switch(adopterMenu()) {
 			case 1: 
 				System.out.println("Here are the available fur babies.");
-				AdopterService.getAll();
+				AdopterService.getPet();
 				AdopterService.apply();
 			case 2:
 				//check status()
