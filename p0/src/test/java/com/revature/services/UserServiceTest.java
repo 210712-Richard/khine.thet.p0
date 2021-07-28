@@ -27,7 +27,10 @@ public class UserServiceTest {
 	@BeforeAll
 	public static void setupClass() {
 		u = new User();
-		u.setUsername("Test");
+		u.setUsername("test"); 
+		u.setEmail("test@test.test");
+		u.setBirthday(LocalDate.of(1998, 1, 1));
+		u.setAddress("test");
 	}
 	
 	@BeforeEach
@@ -36,7 +39,18 @@ public class UserServiceTest {
 		service.ud = Mockito.mock(UserDAO.class);
 	}
 	
-	@Test //Why is it failure trace 
+	@Test
+	public void testLogin() {
+		String username = "user";
+		service.login(username);
+		
+		ArgumentCaptor<User> captor = ArgumentCaptor.forClass(User.class);
+		
+		assertEquals(username, "Assert that the login user is the same as username.");
+		
+	}
+	
+	@Test
 	public void testCheckAvailabilityInThrowsException() {
 		assertThrows(NullPointerException.class, () -> {service.checkAvailability(null);});
 	}
@@ -47,26 +61,24 @@ public class UserServiceTest {
 		assertTrue(service.checkAvailability(u));
 	}
 	
+	
 	@Test
-	public void testRegisterReturnsValid() {
-		String username = "test";
-		String email = "test@test.test";
-		LocalDate birthday = LocalDate.of(1998, 1, 1);
-		String address = "test";
-		User user = service.register(username, email, birthday, address);
+	public void testRegister() {
 		
+		
+		service.register(u.getUsername(), u.getEmail(), u.getBirthday(), u.getAddress());
 		ArgumentCaptor<User> captor = ArgumentCaptor.forClass(User.class);
 
 		Mockito.verify(service.ud).addUser(captor.capture());
-		Mockito.verify(service.ud).writeToFile();
-
+		
 		User u = captor.getValue();
 		assertEquals(UserType.ADOPTER, u.getTypes(), "Asserting starting type is ADOPTER");
-		assertEquals(username, u.getUsername(), "Asserting username is correct");
-		assertEquals(email, u.getEmail(), "Asserting email is correct");
-		assertEquals(birthday, u.getBirthday(), "Asserting birthday is correct");
-		assertEquals(address, u.getAddress(), "Asserting address is correct");
+		assertEquals(u.getUsername(), u.getUsername(), "Asserting username is correct");
+		assertEquals(u.getEmail(), u.getEmail(), "Asserting email is correct");
+		assertEquals(u.getBirthday(), u.getBirthday(), "Asserting birthday is correct");
+		assertEquals(u.getAddress(), u.getAddress(), "Asserting address is correct");
 	}
+
 	
 //	@Test
 //	public void testCheckBirthday() {

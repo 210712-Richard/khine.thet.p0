@@ -33,9 +33,9 @@ public class UserDAO {
 		users.add(u);
 	}
 	
-	public User getUser(String username) {
+	public User getUser(String name) {
 		return users.stream()
-				.filter((u) -> u.getUsername().equals(username))
+				.filter((u) -> u.getUsername().equals(name))
 				.findFirst()
 				.orElse(null);
 	}
